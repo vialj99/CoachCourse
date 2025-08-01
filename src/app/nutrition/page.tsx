@@ -30,7 +30,15 @@ export default function NutritionPage() {
   carbs: number;
   fat: number;
 } | null>(null)
-  const [meals, setMeals] = useState([])
+  const [meals, setMeals] = useState<{
+  meal: string;
+  timing: string;
+  calories: number;
+  foods: string[];
+  protein: number;
+  carbs: number;
+  fat: number;
+}[]>([])
 
  const handleInputChange = (field: string, value: string | number) => {
     setUserProfile(prev => ({
