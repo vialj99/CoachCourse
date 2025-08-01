@@ -51,7 +51,7 @@ export default function NutritionPage() {
       'très intense': 1.9
     }
     
-    const totalCalories = mb * activityFactors[userProfile.activityLevel]
+    const totalCalories = mb * activityFactors[userProfile.activityLevel as keyof typeof activityFactors]
     
     let adjustedCalories = totalCalories
     let goalText = ""
