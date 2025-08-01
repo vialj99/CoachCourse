@@ -12,7 +12,15 @@ export default function NutritionPage() {
     goal: 'maintenir'
   })
   
-  const [nutritionPlan, setNutritionPlan] = useState([])
+  const [nutritionPlan, setNutritionPlan] = useState<{
+  meal: string;
+  timing: string;
+  calories: number;
+  foods: string[];
+  protein: number;
+  carbs: number;
+  fat: number;
+}[]>([])
   const [calorieNeeds, setCalorieNeeds] = useState<{
   basal: number;
   total: number;
