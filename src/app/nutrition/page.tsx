@@ -13,7 +13,15 @@ export default function NutritionPage() {
   })
   
   const [nutritionPlan, setNutritionPlan] = useState([])
-  const [calorieNeeds, setCalorieNeeds] = useState(null)
+  const [calorieNeeds, setCalorieNeeds] = useState<{
+  basal: number;
+  total: number;
+  adjusted: number;
+  goalText: string;
+  protein: number;
+  carbs: number;
+  fat: number;
+} | null>(null)
   const [meals, setMeals] = useState([])
 
  const handleInputChange = (field: string, value: string | number) => {
