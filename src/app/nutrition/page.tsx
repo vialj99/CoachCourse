@@ -16,7 +16,7 @@ export default function NutritionPage() {
   const [calorieNeeds, setCalorieNeeds] = useState(null)
   const [meals, setMeals] = useState([])
 
-  const handleInputChange = (field, value) => {
+ const handleInputChange = (field: string, value: string | number) => {
     setUserProfile(prev => ({
       ...prev,
       [field]: value
