@@ -34,7 +34,7 @@ export default function ObjectifsPage() {
     }
   }
 
-  const toggleGoal = (id) => {
+ const toggleGoal = (id: number) => {
     setGoals(goals.map(goal => 
       goal.id === id ? { ...goal, completed: !goal.completed } : goal
     ))
