@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from 'react'
 
 export default function PaceSimulatorPage() {
@@ -11,9 +10,22 @@ export default function PaceSimulatorPage() {
     vma: ''
   })
   
-  const [results, setResults] = useState(null)
-  const [calculations, setCalculations] = useState([])
-
+  const [results, setResults] = useState<{
+    distance?: string;
+    name?: string;
+    time?: string;
+    pace?: string;
+    speed?: string;
+  }[] | null>(null)
+  
+  const [calculations, setCalculations] = useState<{
+    id: number;
+    date: string;
+    goalTime: string;
+    goalDistance: string;
+    pace: string;
+  }[]>([])
+  
   const calculatePace = () => {
     if (!inputs.goalTime || !inputs.goalDistance) {
       alert('Veuillez remplir le temps objectif et la distance')
@@ -53,7 +65,7 @@ export default function PaceSimulatorPage() {
     }
     setCalculations(prev => [newCalculation, ...prev.slice(0, 4)])
   }
-
+  
   const calculateFromVMA = () => {
     if (!inputs.vma) {
       alert('Veuillez entrer votre VMA')
@@ -61,7 +73,7 @@ export default function PaceSimulatorPage() {
     }
     
     const vma = parseFloat(inputs.vma)
-    const percentages = {
+    const percentages: Record<string, number> = {
       'Endurance (60-70%)': vma * 0.65,
       'Rythme (75-85%)': vma * 0.80,
       'Seuil (85-90%)': vma * 0.87,
@@ -83,11 +95,11 @@ export default function PaceSimulatorPage() {
     
     setResults(vmaResults)
   }
-
+  
   const clearResults = () => {
     setResults(null)
   }
-
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-indigo-800 mb-8">⚡ Simulateur d'Allure</h1>
@@ -138,7 +150,6 @@ export default function PaceSimulatorPage() {
             </div>
           </div>
         </div>
-
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Calcul par VMA</h2>
           
@@ -168,7 +179,6 @@ export default function PaceSimulatorPage() {
             </button>
           </div>
         </div>
-
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Calculs récents</h2>
           
@@ -197,7 +207,7 @@ export default function PaceSimulatorPage() {
           )}
         </div>
       </div>
-
+      
       {results && (
         <div className="mt-8 bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Résultats</h2>
@@ -221,7 +231,7 @@ export default function PaceSimulatorPage() {
           </div>
         </div>
       )}
-
+      
       <div className="mt-8 bg-white rounded-xl shadow-lg p-6">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Tableau de référence</h2>
         <div className="overflow-x-auto">
