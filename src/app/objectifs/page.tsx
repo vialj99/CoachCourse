@@ -1,22 +1,33 @@
 "use client"
-
 import { useState } from 'react'
 
 export default function ObjectifsPage() {
-  const [goals, setGoals] = useState([
+  const [goals, setGoals] = useState<{
+    id: number;
+    title: string;
+    targetDate: string;
+    progress: number;
+    completed: boolean;
+    category: string;
+  }[]>([
     { id: 1, title: 'Courir 10km en moins de 50 minutes', targetDate: '2024-06-01', progress: 75, completed: false, category: 'performance' },
     { id: 2, title: 'Terminer un semi-marathon', targetDate: '2024-09-15', progress: 40, completed: false, category: 'distance' },
     { id: 3, title: 'Perdre 5kg', targetDate: '2024-07-01', progress: 60, completed: false, category: 'poids' },
     { id: 4, title: 'Courir 3 fois par semaine', targetDate: '2024-12-31', progress: 85, completed: false, category: 'fréquence' }
   ])
   
-  const [newGoal, setNewGoal] = useState({
+  const [newGoal, setNewGoal] = useState<{
+    title: string;
+    targetDate: string;
+    category: string;
+    progress: number;
+  }>({
     title: '',
     targetDate: '',
     category: 'performance',
     progress: 0
   })
-
+  
   const [showCompleted, setShowCompleted] = useState(false)
 
   const addGoal = () => {
@@ -34,23 +45,23 @@ export default function ObjectifsPage() {
     }
   }
 
- const toggleGoal = (id: number) => {
+  const toggleGoal = (id: number) => {
     setGoals(goals.map(goal => 
       goal.id === id ? { ...goal, completed: !goal.completed } : goal
     ))
   }
 
-  const updateProgress = (id, newProgress) => {
+  const updateProgress = (id: number, newProgress: number) => {
     setGoals(goals.map(goal => 
       goal.id === id ? { ...goal, progress: Math.max(0, Math.min(100, newProgress)) } : goal
     ))
   }
 
-  const deleteGoal = (id) => {
+  const deleteGoal = (id: number) => {
     setGoals(goals.filter(goal => goal.id !== id))
   }
 
-  const getDaysRemaining = (targetDate) => {
+  const getDaysRemaining = (targetDate: string) => {
     const today = new Date()
     const target = new Date(targetDate)
     const diffTime = target - today
@@ -58,14 +69,14 @@ export default function ObjectifsPage() {
     return diffDays
   }
 
-  const getCategoryIcon = (category) => {
+  const getCategoryIcon = (category: string) => {
     const icons = {
       performance: '🏃‍♂️',
       distance: '📏',
       poids: '⚖️',
       fréquence: '📅'
     }
-    return icons[category] || '🎯'
+    return icons[category as keyof typeof icons] || '🎯'
   }
 
   const activeGoals = goals.filter(goal => !goal.completed)
@@ -122,7 +133,6 @@ export default function ObjectifsPage() {
             </button>
           </div>
         </div>
-
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Statistiques</h2>
           <div className="grid grid-cols-2 gap-4 mb-6">
@@ -153,7 +163,6 @@ export default function ObjectifsPage() {
           </div>
         </div>
       </div>
-
       <div className="mt-8 bg-white rounded-xl shadow-lg p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold text-gray-800">Objectifs Actifs</h2>
