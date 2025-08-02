@@ -211,9 +211,9 @@ export default function NutritionPage() {
   ))
 }
 
-  const deleteMeal = (id) => {
-    setMeals(prev => prev.filter(meal => meal.id !== id))
-  }
+  const deleteMeal = (index: number) => {
+  setMeals(prev => prev.filter((meal, i) => i !== index))
+}
 
   return (
     <div className="container mx-auto px-4 py-8">
