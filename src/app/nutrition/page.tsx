@@ -193,16 +193,17 @@ export default function NutritionPage() {
   }
 
   const addCustomMeal = () => {
-    const newMeal = {
-      id: Date.now(),
-      name: 'Nouveau repas',
-      calories: 0,
-      protein: 0,
-      carbs: 0,
-      fat: 0
-    }
-    setMeals(prev => [...prev, newMeal])
+  const newMeal = {
+    meal: `Repas ${meals.length + 1}`,
+    timing: 'Personnalisé',
+    calories: 0,
+    foods: [],
+    protein: 0,
+    carbs: 0,
+    fat: 0
   }
+  setMeals(prev => [...prev, newMeal])
+}
 
   const updateMeal = (id, field, value) => {
     setMeals(prev => prev.map(meal => 
