@@ -202,22 +202,22 @@ export default function NutritionPage() {
     carbs: 0,
     fat: 0
   }
-  setMeals(prev => [...prev, newMeal])
+    setMeals(prev => [...prev, newMeal])
 }
 
-  const updateMeal = (index: number, field: string, value: string | number) => {
+const updateMeal = (index: number, field: string, value: string | number) => {
   setMeals(prev => prev.map((meal, i) => 
     i === index ? { ...meal, [field]: value } : meal
   ))
 }
 
-  const deleteMeal = (index: number) => {
+const deleteMeal = (index: number) => {
   setMeals(prev => prev.filter((meal, i) => i !== index))
 }
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-indigo-800 mb-8">🥗 Plan Nutritionnel</h1>
+return (
+  <div className="container mx-auto px-4 py-8">
+    <h1 className="text-4xl font-bold text-indigo-800 mb-8">🥗 Plan Nutritionnel</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="space-y-6">
