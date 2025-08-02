@@ -205,7 +205,7 @@ export default function NutritionPage() {
   setMeals(prev => [...prev, newMeal])
 }
 
-  const updateMeal = (id, field, value) => {
+  const updateMeal = (id: number, field: string, value: string | number) => {
     setMeals(prev => prev.map(meal => 
       meal.id === id ? { ...meal, [field]: value } : meal
     ))
