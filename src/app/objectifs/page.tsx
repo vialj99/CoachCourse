@@ -62,11 +62,11 @@ export default function ObjectifsPage() {
   }
 
   const getDaysRemaining = (targetDate: string) => {
-    const today = new Date()
-    const target = new Date(targetDate)
-    const diffTime = target - today
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    return diffDays
+  const today = new Date()
+  const target = new Date(targetDate)
+  const diffTime = target.getTime() - today.getTime()
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+  return diffDays
   }
 
   const getCategoryIcon = (category: string) => {
