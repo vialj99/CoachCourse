@@ -402,7 +402,7 @@ export default function NutritionPage() {
             
             {meals.length > 0 ? (
               <div className="space-y-3">
-                {meals.map((meal) => (
+               {meals.map((meal, index) => (
                  <div key={index} className="border rounded-lg p-3">
                     <div className="flex justify-between items-center mb-2">
                       <input
