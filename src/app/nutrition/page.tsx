@@ -407,8 +407,8 @@ export default function NutritionPage() {
                     <div className="flex justify-between items-center mb-2">
                       <input
                         type="text"
-                        value={meal.name}
-                        onChange={(e) => updateMeal(meal.id, 'name', e.target.value)}
+                        value={meal.meal}
+                          ={onChange(e) => updateMeal(index, 'meal', e.target.value)}
                         className="font-semibold border-none outline-none bg-transparent"
                       />
                       <button
