@@ -412,7 +412,7 @@ export default function NutritionPage() {
                         className="font-semibold border-none outline-none bg-transparent"
                       />
                       <button
-                        onClick={() => deleteMeal(meal.id)}
+                        onClick={() => deleteMeal(index)}
                         className="text-red-600 hover:text-red-800"
                       >
                         🗑️
@@ -423,7 +423,7 @@ export default function NutritionPage() {
                         <input
                           type="number"
                           value={meal.calories}
-                          onChange={(e) => updateMeal(meal.id, 'calories', parseInt(e.target.value) || 0)}
+                          onChange={(e) => updateMeal(index, 'calories', parseInt(e.target.value) || 0)}
                           className="w-full px-2 py-1 border rounded text-center"
                           placeholder="Cal"
                         />
@@ -432,7 +432,7 @@ export default function NutritionPage() {
                         <input
                           type="number"
                           value={meal.protein}
-                          onChange={(e) => updateMeal(meal.id, 'protein', parseInt(e.target.value) || 0)}
+                          onChange={(e) => updateMeal(index, 'protein', parseInt(e.target.value) || 0)}
                           className="w-full px-2 py-1 border rounded text-center"
                           placeholder="Prot"
                         />
@@ -441,7 +441,7 @@ export default function NutritionPage() {
                         <input
                           type="number"
                           value={meal.carbs}
-                          onChange={(e) => updateMeal(meal.id, 'carbs', parseInt(e.target.value) || 0)}
+                          onChange={(e) => updateMeal(index, 'carbs', parseInt(e.target.value) || 0)}
                           className="w-full px-2 py-1 border rounded text-center"
                           placeholder="Gluc"
                         />
@@ -450,7 +450,7 @@ export default function NutritionPage() {
                         <input
                           type="number"
                           value={meal.fat}
-                          onChange={(e) => updateMeal(meal.id, 'fat', parseInt(e.target.value) || 0)}
+                          onChange={(e) => updateMeal(index, 'fat', parseInt(e.target.value) || 0)}
                           className="w-full px-2 py-1 border rounded text-center"
                           placeholder="Lip"
                         />
