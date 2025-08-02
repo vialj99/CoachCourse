@@ -205,11 +205,11 @@ export default function NutritionPage() {
   setMeals(prev => [...prev, newMeal])
 }
 
-  const updateMeal = (id: number, field: string, value: string | number) => {
-    setMeals(prev => prev.map(meal => 
-      meal.id === id ? { ...meal, [field]: value } : meal
-    ))
-  }
+  const updateMeal = (index: number, field: string, value: string | number) => {
+  setMeals(prev => prev.map((meal, i) => 
+    i === index ? { ...meal, [field]: value } : meal
+  ))
+}
 
   const deleteMeal = (id) => {
     setMeals(prev => prev.filter(meal => meal.id !== id))
