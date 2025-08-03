@@ -9,10 +9,10 @@ export default function PlanningPage() {
     vma: string;
     availableDays: string[];
   }>({
-    level: 'débutant',
-    weeklyDistance: '',
-    age: '',
-    vma: '',
+    level: 'intermédiaire',
+    weeklyDistance: '25',
+    age: '30',
+    vma: '14',
     availableDays: ['lundi', 'mercredi', 'samedi']
   })
   
@@ -26,7 +26,7 @@ export default function PlanningPage() {
   
   const [isGenerating, setIsGenerating] = useState(false)
   const [notification, setNotification] = useState('')
-  
+
   const generatePersonalizedPlan = () => {
     setIsGenerating(true)
     setNotification('')
@@ -61,7 +61,8 @@ export default function PlanningPage() {
       duration: string;
       intensity: string;
       details: string;
-      }[] = []
+    }[] = []
+    
     const allDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
     
     allDays.forEach(day => {
@@ -124,146 +125,192 @@ export default function PlanningPage() {
         : [...prev.availableDays, day]
     }))
   }
-  
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-indigo-800 mb-8">📋 Planning d'Entraînement</h1>
-      
-      {notification && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6">
-          {notification}
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Planning d'Entraînement</h1>
+          <p className="text-xl text-gray-600">Des plans sur mesure adaptés à vos objectifs et votre niveau</p>
         </div>
-      )}
-      
-      <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Votre Profil Coureur</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Niveau</label>
-            <select
-              value={userProfile.level}
-              onChange={(e) => setUserProfile(prev => ({ ...prev, level: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="débutant">Débutant</option>
-              <option value="intermédiaire">Intermédiaire</option>
-              <option value="avancé">Avancé</option>
-            </select>
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">VMA (km/h)</label>
-            <input
-              type="number"
-              value={userProfile.vma}
-              onChange={(e) => setUserProfile(prev => ({ ...prev, vma: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Ex: 14"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Distance hebdomadaire (km)</label>
-            <input
-              type="number"
-              value={userProfile.weeklyDistance}
-              onChange={(e) => setUserProfile(prev => ({ ...prev, weeklyDistance: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="km/semaine"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Âge</label>
-            <input
-              type="number"
-              value={userProfile.age}
-              onChange={(e) => setUserProfile(prev => ({ ...prev, age: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Âge"
-            />
-          </div>
-        </div>
-        
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Jours disponibles</label>
-          <div className="flex flex-wrap gap-2">
-            {['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'].map(day => (
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Profile Setup */}
+          <div className="lg:col-span-1">
+            <div className="modern-card p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Votre Profil</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Niveau</label>
+                  <select
+                    value={userProfile.level}
+                    onChange={(e) => setUserProfile(prev => ({ ...prev, level: e.target.value }))}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="débutant">Débutant</option>
+                    <option value="intermédiaire">Intermédiaire</option>
+                    <option value="avancé">Avancé</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">VMA (km/h)</label>
+                  <input
+                    type="number"
+                    value={userProfile.vma}
+                    onChange={(e) => setUserProfile(prev => ({ ...prev, vma: e.target.value }))}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Ex: 14"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Jours d'entraînement</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'].map(day => (
+                      <button
+                        key={day}
+                        onClick={() => toggleDay(day)}
+                        className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
+                          userProfile.availableDays.includes(day)
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        {day.charAt(0).toUpperCase() + day.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
               <button
-                key={day}
-                onClick={() => toggleDay(day)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  userProfile.availableDays.includes(day)
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                onClick={generatePersonalizedPlan}
+                disabled={isGenerating}
+                className={`w-full mt-6 px-6 py-4 rounded-xl font-semibold transition-all ${
+                  isGenerating
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'btn-primary'
                 }`}
               >
-                {day.charAt(0).toUpperCase() + day.slice(1)}
+                {isGenerating ? '🔄 Génération en cours...' : '🏃‍♂️ Générer mon plan'}
               </button>
-            ))}
+            </div>
+
+            {/* AI Coach Tips */}
+            <div className="modern-card p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">💡 Conseils IA</h3>
+              <div className="space-y-3">
+                <div className="bg-blue-50 p-4 rounded-xl">
+                  <p className="text-sm text-blue-800">
+                    Basé sur votre profil, je recommande 3-4 séances par semaine pour une progression optimale.
+                  </p>
+                </div>
+                <div className="bg-green-50 p-4 rounded-xl">
+                  <p className="text-sm text-green-800">
+                    N'oubliez pas d'inclure une séance longue chaque semaine pour améliorer votre endurance.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <button
-          onClick={generatePersonalizedPlan}
-          disabled={isGenerating}
-          className={`w-full px-6 py-3 rounded-lg font-semibold transition-colors ${
-            isGenerating
-              ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-indigo-600 hover:bg-indigo-700 text-white'
-          }`}
-        >
-          {isGenerating ? '🔄 Génération en cours...' : '🏃‍♂️ Générer mon planning personnalisé'}
-        </button>
-      </div>
-      
-      {trainingPlan.length > 0 && (
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Votre Planning Personnalisé</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-3 px-4">Jour</th>
-                  <th className="text-left py-3 px-4">Activité</th>
-                  <th className="text-left py-3 px-4">Durée</th>
-                  <th className="text-left py-3 px-4">Intensité</th>
-                  <th className="text-left py-3 px-4">Détails</th>
-                  <th className="text-left py-3 px-4">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {trainingPlan.map((day, index) => (
-                  <tr key={index} className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4 font-semibold">{day.day}</td>
-                    <td className="py-3 px-4">{day.activity}</td>
-                    <td className="py-3 px-4">{day.duration}</td>
-                    <td className="py-3 px-4">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        day.intensity === 'Faible' ? 'bg-green-100 text-green-800' :
-                        day.intensity === 'Modérée' ? 'bg-yellow-100 text-yellow-800' :
-                        day.intensity === 'Élevée' ? 'bg-orange-100 text-orange-800' :
-                        day.intensity === 'Très élevée' ? 'bg-red-100 text-red-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {day.intensity}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-sm text-gray-600">{day.details}</td>
-                    <td className="py-3 px-4">
+
+          {/* Training Plan */}
+          <div className="lg:col-span-2">
+            {trainingPlan.length > 0 ? (
+              <div className="modern-card p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">Votre Plan Semainier</h2>
+                  <div className="flex space-x-2">
+                    <button className="px-4 py-2 bg-blue-100 text-blue-700 rounded-xl font-medium hover:bg-blue-200 transition-colors">
+                      Exporter
+                    </button>
+                    <button className="px-4 py-2 bg-green-100 text-green-700 rounded-xl font-medium hover:bg-green-200 transition-colors">
+                      Partager
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {trainingPlan.map((day, index) => (
+                    <div key={index} className={`border-2 rounded-2xl p-6 transition-all hover:shadow-lg ${
+                      day.activity === 'Repos' 
+                        ? 'border-gray-200 bg-gray-50' 
+                        : 'border-blue-200 bg-blue-50'
+                    }`}>
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold ${
+                            day.activity === 'Repos' ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-600 to-purple-600'
+                          }`}>
+                            {day.day.charAt(0).toUpperCase()}
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900">{day.day}</h3>
+                            <p className={`text-sm font-medium ${
+                              day.activity === 'Repos' ? 'text-gray-600' : 'text-blue-600'
+                            }`}>
+                              {day.activity}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {day.activity !== 'Repos' && (
+                          <div className="text-right">
+                            <div className="text-lg font-bold text-gray-900">{day.duration}</div>
+                            <div className={`text-sm font-medium ${
+                              day.intensity === 'Faible' ? 'text-green-600' :
+                              day.intensity === 'Modérée' ? 'text-yellow-600' :
+                              day.intensity === 'Élevée' ? 'text-orange-600' :
+                              'text-red-600'
+                            }`}>
+                              {day.intensity}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
                       {day.activity !== 'Repos' && (
-                        <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                          Marquer terminé
-                        </button>
+                        <div className="bg-white rounded-xl p-4">
+                          <p className="text-sm text-gray-600">{day.details}</p>
+                          <div className="flex space-x-3 mt-4">
+                            <button className="flex-1 bg-blue-600 text-white py-2 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                              Commencer
+                            </button>
+                            <button className="px-4 py-2 border border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition-colors">
+                              Modifier
+                            </button>
+                            <button className="px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors">
+                              Report
+                            </button>
+                          </div>
+                        </div>
                       )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="modern-card p-12 text-center">
+                <div className="text-6xl mb-4">📋</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Pas de plan généré</h3>
+                <p className="text-gray-600 mb-8">
+                  Configurez votre profil et générez votre premier plan d'entraînement personnalisé.
+                </p>
+                <button
+                  onClick={generatePersonalizedPlan}
+                  className="btn-primary px-8 py-4"
+                >
+                  Générer mon plan
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
