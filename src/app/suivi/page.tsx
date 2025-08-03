@@ -1,15 +1,31 @@
 "use client"
-
 import { useState } from 'react'
 
 export default function SuiviPage() {
-  const [sessions, setSessions] = useState([
+  const [sessions, setSessions] = useState<{
+    id: number;
+    date: string;
+    activity: string;
+    planned: string;
+    actual: string;
+    distance: string;
+    pace: string;
+    feeling: string;
+  }[]>([
     { id: 1, date: '2024-01-15', activity: 'Course facile', planned: '30 min', actual: '32 min', distance: '5.2km', pace: '6:09/km', feeling: 'Bien' },
     { id: 2, date: '2024-01-13', activity: 'Longue distance', planned: '60 min', actual: '58 min', distance: '9.8km', pace: '5:55/km', feeling: 'Excellent' },
     { id: 3, date: '2024-01-10', activity: 'Fractionné', planned: '40 min', actual: '42 min', distance: '6.5km', pace: '6:28/km', feeling: 'Difficile' }
   ])
-
-  const [newSession, setNewSession] = useState({
+  
+  const [newSession, setNewSession] = useState<{
+    date: string;
+    activity: string;
+    planned: string;
+    actual: string;
+    distance: string;
+    pace: string;
+    feeling: string;
+  }>({
     date: '',
     activity: '',
     planned: '',
@@ -18,14 +34,14 @@ export default function SuiviPage() {
     pace: '',
     feeling: 'Bien'
   })
-
-  const handleInputChange = (field, value) => {
+  
+  const handleInputChange = (field: string, value: string | number) => {
     setNewSession(prev => ({
       ...prev,
       [field]: value
     }))
   }
-
+  
   const addSession = () => {
     console.log("Tentative d'ajout de séance...")
     console.log("Nouvelle session:", newSession)
@@ -61,15 +77,15 @@ export default function SuiviPage() {
     
     alert('Séance ajoutée avec succès !')
   }
-
-  const deleteSession = (id) => {
+  
+  const deleteSession = (id: number) => {
     setSessions(sessions.filter(session => session.id !== id))
   }
-
-  const totalDistance = sessions.reduce((sum, session) => sum + parseFloat(session.distance || 0), 0)
+  
+  const totalDistance = sessions.reduce((sum, session) => sum + parseFloat(session.distance || '0'), 0)
   const avgPace = sessions.length > 0 ? '6:11/km' : '0:00/km'
   const totalSessions = sessions.length
-
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-indigo-800 mb-8">📈 Suivi des Performances</h1>
@@ -207,7 +223,6 @@ export default function SuiviPage() {
             </div>
           </div>
         </div>
-
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Historique des Séances</h2>
           <div className="space-y-3 max-h-96 overflow-y-auto">
