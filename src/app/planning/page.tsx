@@ -1,9 +1,14 @@
 "use client"
-
 import { useState } from 'react'
 
 export default function PlanningPage() {
-  const [userProfile, setUserProfile] = useState({
+  const [userProfile, setUserProfile] = useState<{
+    level: string;
+    weeklyDistance: string;
+    age: string;
+    vma: string;
+    availableDays: string[];
+  }>({
     level: 'débutant',
     weeklyDistance: '',
     age: '',
@@ -12,16 +17,16 @@ export default function PlanningPage() {
   })
   
   const [trainingPlan, setTrainingPlan] = useState<{
-  week: number;
-  day: number;
-  type: string;
-  description: string;
-  duration: string;
-  intensity: string;
-}[]>([])
+    day: string;
+    activity: string;
+    duration: string;
+    intensity: string;
+    details: string;
+  }[]>([])
+  
   const [isGenerating, setIsGenerating] = useState(false)
   const [notification, setNotification] = useState('')
-
+  
   const generatePersonalizedPlan = () => {
     setIsGenerating(true)
     setNotification('')
@@ -35,8 +40,12 @@ export default function PlanningPage() {
       setTimeout(() => setNotification(''), 3000)
     }, 1500)
   }
-
-  const calculateTrainingPlan = (profile) => {
+  
+  const calculateTrainingPlan = (profile: {
+    level: string;
+    vma: string;
+    availableDays: string[];
+  }) => {
     const { level, vma, availableDays } = profile
     
     const vmaValue = parseFloat(vma) || 10
@@ -45,7 +54,7 @@ export default function PlanningPage() {
       tempo: (vmaValue * 0.80).toFixed(1),
       interval: (vmaValue * 0.95).toFixed(1)
     }
-
+    
     const weekPlan = []
     const allDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
     
@@ -66,9 +75,18 @@ export default function PlanningPage() {
     
     return weekPlan
   }
-
-  const generateSessionForDay = (day, level, paces) => {
-    const sessions = {
+  
+  const generateSessionForDay = (day: string, level: string, paces: {
+    easy: string;
+    tempo: string;
+    interval: string;
+  }) => {
+    const sessions: Record<string, Record<string, {
+      activity: string;
+      duration: string;
+      intensity: string;
+      details: string;
+    }>> = {
       débutant: {
         lundi: { activity: 'Course facile', duration: '30-40 min', intensity: 'Faible', details: `Allure : ${paces.easy} km/h` },
         mercredi: { activity: 'Course facile', duration: '25-35 min', intensity: 'Faible', details: `Allure : ${paces.easy} km/h` },
@@ -91,8 +109,8 @@ export default function PlanningPage() {
       ...sessions[level][day]
     }
   }
-
-  const toggleDay = (day) => {
+  
+  const toggleDay = (day: string) => {
     setUserProfile(prev => ({
       ...prev,
       availableDays: prev.availableDays.includes(day)
@@ -100,7 +118,7 @@ export default function PlanningPage() {
         : [...prev.availableDays, day]
     }))
   }
-
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-indigo-800 mb-8">📋 Planning d'Entraînement</h1>
@@ -192,7 +210,7 @@ export default function PlanningPage() {
           {isGenerating ? '🔄 Génération en cours...' : '🏃‍♂️ Générer mon planning personnalisé'}
         </button>
       </div>
-
+      
       {trainingPlan.length > 0 && (
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Votre Planning Personnalisé</h2>
