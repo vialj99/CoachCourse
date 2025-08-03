@@ -55,7 +55,13 @@ export default function PlanningPage() {
       interval: (vmaValue * 0.95).toFixed(1)
     }
     
-    const weekPlan = []
+    const weekPlan: {
+      day: string;
+      activity: string;
+      duration: string;
+      intensity: string;
+      details: string;
+      }[] = []
     const allDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
     
     allDays.forEach(day => {
