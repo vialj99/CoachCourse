@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CoachCourseTrail - Votre coach virtuel pour la course et le trail',
-  description: 'Application de coaching virtuel pour la course à pied et le trail running avec plans d\'entraînement personnalisés, simulateur d\'allure et conseils nutritionnels.',
+  title: 'FlowRun - Your Elite Running Coach',
+  description: 'Professional running coaching platform with AI-powered training plans and performance analytics.',
 }
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="scroll-smooth">
       <body className={inter.className}>
         {children}
       </body>
