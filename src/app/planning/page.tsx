@@ -11,7 +11,14 @@ export default function PlanningPage() {
     availableDays: ['lundi', 'mercredi', 'samedi']
   })
   
-  const [trainingPlan, setTrainingPlan] = useState([])
+  const [trainingPlan, setTrainingPlan] = useState<{
+  week: number;
+  day: number;
+  type: string;
+  description: string;
+  duration: string;
+  intensity: string;
+}[]>([])
   const [isGenerating, setIsGenerating] = useState(false)
   const [notification, setNotification] = useState('')
 
