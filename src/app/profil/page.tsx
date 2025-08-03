@@ -1,9 +1,17 @@
 "use client"
-
 import { useState } from 'react'
 
 export default function ProfilPage() {
-  const [profile, setProfile] = useState({
+  const [profile, setProfile] = useState<{
+    name: string;
+    email: string;
+    age: string;
+    weight: string;
+    height: string;
+    level: string;
+    weeklyDistance: string;
+    favoriteDistance: string;
+  }>({
     name: 'Jean Dupont',
     email: 'jean.dupont@email.com',
     age: '30',
@@ -13,35 +21,44 @@ export default function ProfilPage() {
     weeklyDistance: '25',
     favoriteDistance: '10km'
   })
-
+  
   const [isEditing, setIsEditing] = useState(false)
-
-  const [workoutHistory, setWorkoutHistory] = useState([
+  
+  const [workoutHistory, setWorkoutHistory] = useState<{
+    date: string;
+    type: string;
+    duration: string;
+    distance: string;
+  }[]>([
     { date: '2024-01-15', type: 'Course facile', duration: '32 min', distance: '5.2km' },
     { date: '2024-01-13', type: 'Longue distance', duration: '58 min', distance: '9.8km' },
     { date: '2024-01-10', type: 'Fractionné', duration: '42 min', distance: '6.5km' }
   ])
-
-  const [personalRecords, setPersonalRecords] = useState([
+  
+  const [personalRecords, setPersonalRecords] = useState<{
+    distance: string;
+    time: string;
+    date: string;
+  }[]>([
     { distance: '5km', time: '22:45', date: '2024-01-10' },
     { distance: '10km', time: '48:30', date: '2024-01-05' },
     { distance: '21.1km', time: '1:52:15', date: '2023-12-20' }
   ])
-
-  const handleInputChange = (field, value) => {
+  
+  const handleInputChange = (field: string, value: string | number) => {
     setProfile(prev => ({
       ...prev,
       [field]: value
     }))
   }
-
+  
   const saveProfile = () => {
     setIsEditing(false)
   }
-
+  
   const calculateStats = () => {
     const totalDistance = workoutHistory.reduce((sum, workout) => {
-      return sum + parseFloat(workout.distance || 0)
+      return sum + parseFloat(workout.distance || '0')
     }, 0)
     
     const totalDuration = workoutHistory.reduce((sum, workout) => {
@@ -57,9 +74,9 @@ export default function ProfilPage() {
       avgPace: `${Math.floor(avgPace)}:${Math.round((avgPace - Math.floor(avgPace)) * 60).toString().padStart(2, '0')}/km`
     }
   }
-
+  
   const stats = calculateStats()
-
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-indigo-800 mb-8">👤 Mon Profil</h1>
@@ -159,7 +176,6 @@ export default function ProfilPage() {
             </div>
           </div>
         </div>
-
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Paramètres de Course</h2>
           
@@ -233,7 +249,7 @@ export default function ProfilPage() {
           </div>
         </div>
       </div>
-
+      
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">📊 Mes Statistiques</h2>
@@ -268,7 +284,6 @@ export default function ProfilPage() {
             ))}
           </div>
         </div>
-
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">🏆 Records Personnels</h2>
           <div className="space-y-3">
